@@ -1,0 +1,11 @@
+update-alternatives: --install needs <link> <name> <path> <priority>
+
+Use 'update-alternatives --help' for program usage information.
+
+sudo update-alternatives --install /usr/bin/python python /usr/bin/python2.7 1
+sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.6 2
+sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.8 3
+
+sudo update-alternatives --config python
+
+select default no 

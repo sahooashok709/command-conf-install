@@ -1,0 +1,19 @@
+on remote server
+ssh -i esv2-w.pem -R 19999:localhost:22 ubuntu@52.77.233.199
+
+on local server
+ssh expadmin@localhost -p 19999
+
+===================================================================
+
+map on other-port to port 22, and do tunnelling 
+on local machine 
+sudo socat TCP-LISTEN:80,fork TCP:127.0.0.1:22  (here port 80 to port 22)
+
+on remote machine 
+ssh -vi kube-node-1.pem -R 29999:localhost:22 ubuntu@15.207.71.92 -p 80
+
+ssh userappadmin@localhost -p 29999
+
+
+sudo socat TCP-LISTEN:80,fork TCP:10.211.19.37:80

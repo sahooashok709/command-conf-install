@@ -1,0 +1,13 @@
+mvn clean (clean the local repo)
+mvn validate (validate written in pom file)
+mvn compile (generate the class file)
+mvn test (unit test the class file publish code coverage and test coversge reports)
+mvn package (integrate and generate artfacts jar war ear)
+mvn verify (integration test)
+mvn install (send to the local repo)
+mvn deploy (send to the remote repo)
+mvn sonar:sonar (run code analysis test)
+
+
+
+

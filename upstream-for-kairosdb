@@ -1,0 +1,69 @@
+        upstream kairosdb {
+            #random;
+            server 10.211.19.36:8080;
+            server 10.211.19.38:8080;
+            server 10.211.19.43:8080;
+            server 10.211.19.44:8080;
+            server 10.211.19.45:8080;
+        }
+
+
+            location /spaceapi/api {
+                 auth_request /authmiddle;
+                 proxy_set_header        Host $http_host;
+                 proxy_set_header        X-Real-IP $remote_addr;
+                 proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+                 proxy_set_header        X-Forwarded-Proto $scheme;
+                 proxy_set_header        X-Forwarded-Host $host;
+                 proxy_set_header        X-Forwarded-Server $http_host;
+                 proxy_set_header        X-Forwarded-Port 443;
+                 proxy_pass http://kairosdb/api;
+            } 
+
+            location /spaceapi/ {
+                 auth_request /authmiddle;
+                 proxy_set_header        Host $http_host;
+                 proxy_set_header        X-Real-IP $remote_addr;
+                 proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+                 proxy_set_header        X-Forwarded-Proto $scheme;
+                 proxy_set_header        X-Forwarded-Host $host;
+                 proxy_set_header        X-Forwarded-Server $http_host;
+                 proxy_set_header        X-Forwarded-Port 443;
+                 proxy_pass http://kairosdb/;
+            }
+
+            location /spacedata/ {
+                 auth_basic “Administrator”;
+                 auth_basic_user_file /etc/nginx/.htkairos;
+                 proxy_set_header        Host $http_host;
+                 proxy_set_header        X-Real-IP $remote_addr;
+                 proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+                 proxy_set_header        X-Forwarded-Proto $scheme;
+                 proxy_set_header        X-Forwarded-Host $host;
+                 proxy_set_header        X-Forwarded-Server $http_host;
+                 proxy_set_header        X-Forwarded-Port 443;
+                 proxy_pass http://kairosdb/;
+            }
+
+
+            location /spaceapi/api {
+                 proxy_set_header        Host $http_host;
+                 proxy_set_header        X-Real-IP $remote_addr;
+                 proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+                 proxy_set_header        X-Forwarded-Proto $scheme;
+                 proxy_set_header        X-Forwarded-Host $host;
+                 proxy_set_header        X-Forwarded-Server $http_host;
+                 proxy_set_header        X-Forwarded-Port 443;
+                 proxy_pass http://kairosdb/api;
+            } 
+
+            location /spaceapi/ {
+                 proxy_set_header        Host $http_host;
+                 proxy_set_header        X-Real-IP $remote_addr;
+                 proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+                 proxy_set_header        X-Forwarded-Proto $scheme;
+                 proxy_set_header        X-Forwarded-Host $host;
+                 proxy_set_header        X-Forwarded-Server $http_host;
+                 proxy_set_header        X-Forwarded-Port 443;
+                 proxy_pass http://kairosdb/;
+            }

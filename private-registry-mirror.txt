@@ -1,0 +1,49 @@
+in mirror registry machine
+===================================
+1-- mkdir /etc/docker/registry/
+vi config.json
+--add this line	
+proxy:
+	remoteurl: dev.exactspace.co
+
+2-- run mirror-registry
+*****
+make a nfs-dir for better convinience across al machine for cache image store
+************
+script to run a mirror registry
+
+#!/bin/bash
+docker service create \
+        --name mirror-registry \
+        --mount type=bind,src=/space/registry,dst=/var/lib/registry \
+        -e REGISTRY_PROXY_REMOTEURL="https://dev.exactspace.co" \
+        --publish published=9001,target=5000 \
+        --replicas 1 \
+        dev.exactspace.co/registry:2
+
+in client machine
+======================
+vi /etc/docker/daemon.json
+{
+        "insecure-registries" : ["vml-2:5000", "vml-2:80", "10.13.1.77", "dev.exactspace.co"],
+        "registry-mirrors" : ["http://10.13.1.77"]
+}
+
+sudo systemctl daemon-reload
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

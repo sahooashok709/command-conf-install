@@ -1,0 +1,82 @@
+version: '3'
+services:
+  model-api:
+    image:  dev.exactspace.co/model-api-es:r1
+    deploy:
+      replicas: 1
+    ports:
+    - "5013:5013"
+    volumes:
+    - /space/log/model-api:/src/log/model-api
+    - /etc/localtime:/etc/localtime,readonly
+    - /etc/timezone:/etc/timezone,readonly
+    extra_hosts:
+    - "api-es:40.87.97.50"
+    - "vml-2:40.114.36.172"
+    environment:
+    - BROKER_ADDRESS=40.87.97.50
+  
+  data-api:
+    image:  dev.exactspace.co/data-api-es:r1
+    deploy:
+      replicas: 1
+    ports:
+    - "5019:5019"
+    volumes:
+    - /space/log/data-api:/src/log/data-api
+    - /etc/localtime:/etc/localtime,readonly
+    - /etc/timezone:/etc/timezone,readonly
+    extra_hosts:
+    - "api-es:40.87.97.50"
+    - "vml-2:40.114.36.172"
+    environment:
+    - BROKER_ADDRESS=40.87.97.50
+
+  streaming-api:
+    image:  dev.exactspace.co/streaming-api-es:r1
+    deploy:
+      replicas: 1
+    ports:
+    - "7000:7000"
+    volumes:
+    - /space/log/streaming-api:/src/log/streaming-api
+    - /etc/localtime:/etc/localtime,readonly
+    - /etc/timezone:/etc/timezone,readonly
+    extra_hosts:
+    - "api-es:40.87.97.50"
+    - "vml-2:40.114.36.172"
+    environment:
+    - BROKER_ADDRESS=40.87.97.50
+
+  lastlist-api:
+    image:  dev.exactspace.co/lastlist-api-es:r1
+    deploy:
+      replicas: 1
+    ports:
+    - "7099:7099"
+    volumes:
+    - /space/log/lastlist-api:/src/log/lastlist-api
+    - /etc/localtime:/etc/localtime,readonly
+    - /etc/timezone:/etc/timezone,readonly
+    extra_hosts:
+    - "api-es:40.87.97.50"
+    - "vml-2:40.114.36.172"
+    environment:
+    - BROKER_ADDRESS=40.87.97.50
+  
+  ingest-master:
+    image:  dev.exactspace.co/ingest-master-es:r1
+    deploy:
+        replicas: 1
+    ports:
+      - "4019:4019"
+    volumes:
+    - /space/log/ingest-master:/src/log/
+    - /etc/localtime:/etc/localtime,readonly
+    - /etc/timezone:/etc/timezone,readonly
+    extra_hosts:
+    - "api-es:40.87.97.50"
+    - "vml-2:40.114.36.172"
+    environment:
+    - BROKER_ADDRESS=40.87.97.50
+    - api_es=40.87.97.50

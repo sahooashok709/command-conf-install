@@ -1,0 +1,27 @@
+  {
+    "api": {
+      "efficiency": "http://20.42.111.102/efficiency/",
+      "meta": "http://20.42.111.102/exactapi",
+      "service": "http://20.42.111.102/service",
+      "datapoints": "http://10.212.63.200/api/v1/datapoints",
+      "query": "http://20.42.111.102/api/v1/datapoints/query",
+      "model": "http://20.42.111.102/model/",
+      "batchefficiency": "http://20.42.111.102/batchefficiency/",
+      "prediction": "http://20.42.111.102/model/prediction",
+      "public_datacenter_url": "https://data.exactspace.co/"
+    },
+    "telegram": {
+      
+    },
+    "email": {
+      "AWS_SECRET_KEY": "",
+      "AWS_ACCESS_KEY": ""
+    },
+    "smtp": {
+      
+    },
+    "BROKER_ADDRESS": "52.186.151.7",
+    "BROKER_PASSWORD": "iota#re-mqtt39",
+    "BROKER_USERNAME": "ES-MQTT",
+    "batchefficiency": "http://20.42.111.102/batchefficiency/",
+  }

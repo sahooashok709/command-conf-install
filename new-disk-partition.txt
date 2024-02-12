@@ -1,0 +1,7 @@
+to see all partition
+    lsblk
+sudo fdisk /dev/sda
+
+sudo fdisk /dev/sda
+
+

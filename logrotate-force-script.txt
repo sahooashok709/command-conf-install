@@ -1,0 +1,32 @@
+monit(){
+    status=$(curl -i -s $1 | head -n1 | cut -d $' ' -f2)
+    rstate=$2
+    echo $3
+    echo $status
+    if [ $status -eq $rstate ]; then state=1; else state=0; fi
+    curl -X POST \
+          http://13.68.199.3/kairosapi/api/v1/datapoints \
+          -H 'Content-type: application/json' \
+          -d "$(gen_d $3 $state)"
+}
+
+monit "localhost/explorer/#" 200 "api-es"
+monit "localhost/sensordata" 405 "data-api"
+monit "localhost:4013/es-ingest/v1" 405 "mqtt-api"
+monit "localhost/model/prediction" 405 "model-api"
+monit "localhost/service/health" 200 "launch-service"
+50000000
+
+
+log_monitor(){
+  cd $1 && size=$(ls -l | grep ".*$2$" | awk '{print $5}')
+  if ( $size >= 50000000 );
+  then
+    sudo logrotate -f /etc/logrotate.d/$3
+  fi
+}
+
+
+log_monitor "/var/log/nginx/" access.log nginx
+log_monitor "/var/log/nginx/" error.log nginx
+log_monitor "/var/log/mongodb/" mongodb.log mongodb-server

@@ -1,0 +1,4 @@
+ 
+if any resource stucked in terminating state
+
+ command:- kubectl patch service api-es-service -n ingress-nginx  -p "{\"metadata\":{\"finalizers\":null}}"

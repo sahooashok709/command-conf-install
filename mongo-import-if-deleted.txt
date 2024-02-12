@@ -1,0 +1,37 @@
+find the mongo backup dir 
+go to the suitable date directory 
+
+take the bson file of your collections like units.bson.gz, equipments.bson.gz etc...
+
+copy that file to other dir 
+g-ungip it 
+command:-gunzip collection.bson.gz
+eg:- gunzip units.bson.gz
+output file --> units.bson
+
+then convert that bson file to human readble json file 
+command:- bsondump --outFile collection.json collection.bson
+eg:- bsondump --outFile units.json units.bson
+
+then find your requirments by unitid, siteid , ingest-id , keep it and delete rest all
+now save your file and restore 
+
+cat collection.json | grep unitids > xyz.json 
+ mongoimport --db exspv2 --collection collection-name xyz.json)
+
+command:- mongoimport --db exspv2 --collection collectiom-name collection.json
+eg: mongoimport --db exspv2 --collection equipment equipments.json
+
+
+For whole database
+mongorestore --db exspv2 --verbose exspv2
+
+
+
+If you restore to an existing database, mongorestore will only insert into the existing database, 
+and does not perform updates of any kind. 
+If existing documents have the same value _id field in the target database and collection, 
+mongorestore will not overwrite those documents.
+
+SO WE NEED TO DELTE EXTSTING (IF REQUIRED AND BEFORE THAT TAKE BACKUP ALSO) DATA AND RESTORE
+UNLESS IT WILL ADD MORE DATA AND DOES NOT OVERWRITE

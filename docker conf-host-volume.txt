@@ -1,0 +1,63 @@
+
+(start)
+====================================
+
+sudo systemctl stop docker
+sudo systemctl status docker
+ps faux | grep -i docker
+mkdir /new/directory/name/where/to/mount/or/move
+rsync -avxP /var/lib/docker/ /new/directory/name/where/to/mount/or/move
+sudo vi /lib/systemd/system/docker.service
+	Find the following line:
+		ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+	change to
+		ExecStart=/usr/bin/dockerd --data-root /new/directory/name/where/to/mount/or/move -H fd:// --containerd=/run/containerd/containerd.sock (new docker version)
+		ExecStart=/usr/bin/dockerd -g /new/directory/name/where/to/mount/or/move -H fd:// --containerd=/run/containerd/containerd.sock (older docker version)
+
+
+sudo vi /etc/docker/daemon.json
+	"data-root": "/datadrive/docker"
+
+
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+sudo systemctl status docker
+
+================================================
+(end)
+
+
+
+#daemon.json
+#{
+#"insecure-registries" : ["dev.exactspace.co"]
+#}
+#
+#add in host file
+#
+#sudo vi /etc/hosts
+#13.232.56.62 dev.exactspace.co
+#
+#sudo systemctl daemon-reload
+#sudo systemctl restart docker
+#sudo systemctl status docker
+#
+#{"data-root": "/datadrive/docker"}
+#
+#now check
+#
+#docker images
+#
+#	grep image id
+#docker inspect image_id | grep WorkDir
+#
+#
+#
+#
+#{
+#  "insecure-registries" : ["vml-2:80","vml-2:5000","dev.exactspace.co", "10.13.1.77"],
+#  "registry-mirrors" : ["http://10.13.1.77"],
+#  "data-root": "/mnt/lib/docker"
+#}
+
+

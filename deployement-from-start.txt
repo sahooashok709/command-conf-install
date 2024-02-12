@@ -1,0 +1,6 @@
+1-- ask the developer for git repo
+2-- make the build directory and setup it
+3-- edit index.py inside prod-server for auto build , and your service 
+4-- edit  index.py in respective prod server (inside starter dir )
+4-- auto deploy need to set up in respective prod server (deploy service)
+5-- stack restart 

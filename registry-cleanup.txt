@@ -1,0 +1,5 @@
+
+command :- docker exec (container-id/name) bin/registry garbage-collect /etc/docker/registry/config.yml -m
+ eg:- docker exec registry bin/registry garbage-collect /etc/docker/registry/config.yml -m
+
+d

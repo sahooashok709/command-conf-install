@@ -1,0 +1,16 @@
+pm2 start file.py --name "service-name"
+add process
+
+pm2 logs id or service-name
+see the logs 
+
+pm2 save
+to save processes before reboot
+
+pm2 resurrect    
+To resurrect all pm2 process after server reboot.
+
+pm2 start index.py  --name mvr-calculation --interpreter python2
+ 
+
+

@@ -1,0 +1,30 @@
+(volume)
+fdisk -l
+fdisk volumeToPartition
+ls /dev/disk----------> check by-label/ , by-partuuid/ , by-uuid/
+mkfs.xfs /dev/sdb1
+mkfs.ext4 /dev/sdb2
+mkdir /documents
+mount /dev/sdb1 /documents
+mount -a
+getfacl directoryName
+df -Th
+lsblk
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(types file system)
+fdisk volumeToPartition
+then l to see list of file system
+then t  to change the file system

@@ -1,0 +1,31 @@
+1. edit 
+	sudo vi /etc/mosquitto/mosquitto.conf
+
+2. append this line `allow_anonymous true` to the end of config file
+
+3. `sudo apt-add-repository ppa:mosquitto-dev/mosquitto-ppa` 
+
+4. sudo apt update
+
+5. sudo apt install mosquitto
+
+   (if asked for configuration  ; press Enter)
+
+6. sudo service mosquitto status
+
+
+
+autosave_interval 1
+autosave_on_changes false
+listener 9002
+#log_dest file /space/mosquitto/log/mosquitto.log
+max_connections -1
+max_inflight_messages 0
+max_queued_messages 0
+#persistence true
+#persistence_location /space/mosquitto/data/
+#listener 1883
+port 1883
+protocol websockets
+allow_anonymous true
+

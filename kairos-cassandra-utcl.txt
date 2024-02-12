@@ -1,0 +1,24 @@
+KAIROS IS A REST WRAPPER OVER CASSANDRA
+
+---------------
+1st  cassandra and then kairos need to restart
+
+1. CASSANDRA IS FINE (SERICE STATUS CASSANDRA)
+sudo service cassandra status
+if it is exited 
+sudo service cassandra stop
+sudo service cassandra start
+
+
+2. KAIROS IS FINE (500 or 502)
+
+cd /opt/kairosdb/bin/
+sudo ./kairosdb-service.sh status
+sudo ./kairosdb-service.sh stop
+
+cd /opt/kairosdb/queue/
+Delete everything under queue/ 
+
+then start kairos
+cd /opt/kairosdb/bin/
+sudo ./kairosdb-service.sh

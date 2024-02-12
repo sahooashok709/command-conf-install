@@ -1,0 +1,61 @@
+on host machine
+======================================
+install nfs-server on host machine
+	sudo apt update
+	sudo apt install nfs-kernel-server
+
+make dir to treat as nfs volume
+	sudo mkdir dir/for/nfs
+eg:-	sudo mkdir /space/log
+
+change ownership to a user, that allowed by all client and host machine
+	sudo chown ------:------ dir/for/nfs
+
+edit this exports file 
+	sudo nano /etc/exports
+	
+	directory_to_share    client1(share_option1,...,share_optionN) client2(share_option1,...,share_optionN)
+eg:-	/space/log 	10.211.19.36(rw,sync,no_subtree_check) 	10.211.19.37(rw,sync,no_subtree_check)
+	
+
+now restrt kernel 
+	sudo systemctl restart nfs-kernel-server
+
+
+
+
+on client machine
+====================================
+install nfs on client
+	sudo apt update
+	sudo apt install nfs-common
+
+	  sudo mkdir -p /space/log
+command:- sudo mount host.remote.ip:/host/dir /client/dir
+eg:-	  sudo mount 10.211.19.38:/space/log/ /space/log
+
+
+Automate in crontab
+==================================
+sudo vi /etc/fstab
+
+add following line
+10.211.19.38:/space/log/	/space/log	nfs auto,nofail,noatime,nolock,intr,tc
+10.13.1.77:/space/registry      /space/registry         nfs auto,nofail,noatime,nolock,intr,tc
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

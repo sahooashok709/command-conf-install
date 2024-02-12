@@ -1,0 +1,16 @@
+docker images
+docker ps
+docker build -f fileName -t tagImage .
+docker run -itd -p hostPort:contPort --name containerName imageName
+docker exec -it containerNameORid commandExecute
+docker exec -it containerNameORid  /bin/bash (to go inside container)
+docker logs contIdORName (to see the log)
+
+
+
+
+
+
+
+
+

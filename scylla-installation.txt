@@ -1,0 +1,27 @@
+installation in all nodes and manager
+
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 5e08fbd8b5d6ec9c
+sudo curl -L --output /etc/apt/sources.list.d/scylla.list http://downloads.scylladb.com/deb/ubuntu/scylla-4.5-$(lsb_release -s -c).list
+sudo apt-get update
+sudo apt-get install -y scylla
+sudo apt-get update
+sudo apt-get install -y openjdk-8-jre-headless
+sudo update-java-alternatives --jre-headless -s java-1.8.0-openjdk-amd64
+
+
+Configure and run Scylla on Ubuntu 18.04
+
+cat /etc/scylla/scylla.yaml
+
+
+Item			Content
+==================================================================================================
+cluster_name		Name of the cluster, all the nodes in the cluster must have the same name
+seeds			Seed nodes are used during startup to bootstrap the gossip process and join the cluster
+listen_address		The IP address that Scylla uses to connect to other Scylla nodes in the cluster
+rpc_address		IP address of interface for client connections (Thrift, CQL)
+
+
+
+('value of PT is ', 738)
+('value of CT is ', 809)

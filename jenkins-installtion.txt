@@ -1,0 +1,261 @@
+ 
+
+
+===================================================================
+|		Install Jenkins on amazon_linux			  |
+===================================================================
+update the linux machine
+yum update –y
+
+Download latest Jenkins code package
+wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+                                      
+Import a key file from Jenkins-CI to enable installation from the package:
+rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+
+yum upgrade -y
+
+Find latest java to be install 
+yum list | grep openjdk
+
+Install Jenkins & java
+yum install jenkins java -y
+
+systemctl daemon-reload
+systemctl start jenkins
+systemctl status jenkins
+
+
+Set java path
+
+find path where java is install
+	file $(which java)
+	file '/etc/alternatives/java'
+	
+then copy the path
+	'/usr/lib/jvm/java-11-amazon-corretto.x86_64'
+	
+go to root directory
+	cd
+
+open .bash_profile in vi or in nano editor
+	vi .bash_profile
+
+set env variable
+	JAVA_HOME='/usr/lib/jvm/java-11-amazon-corretto.x86_64'
+
+set path variable
+	PATH=$JAVA_HOME/bin:$PATH
+
+come out of file 
+	ESC :wq
+
+type command to start bash profile
+	source .bash_profile
+
+
+Set maven 
+
+make directory in opt (/opt/)
+	mkdir maven
+1--- download the binary file apache.maven.org
+download it to /opt/maven
+wget https://mirrors.estointernet.in/apache/maven/maven-3/3.8.1/binaries/apache-maven-3.8.1-bin.tar.gz
+
+2--- untar and unzip it 
+	tar -xvzf   apache-maven-3.8.1-bin.tar.gz
+
+3--- remove tar.gz file
+	rm -rf  apache-maven-3.8.1-bin.tar.gz
+
+Set path & env variable. for this we have to go root directory (/root/), where we find .bash_profile
+
+
+Go inside  apache-maven-3.8.1
+	cd  apache-maven-3.8.1
+
+copy the path
+
+	pwd
+	/opt/maven/apache-maven-3.8.1
+
+set env variable
+	M2_HOME='/opt/maven/apache-maven-3.8.1'
+	M2='$M2_HOME/bin'
+
+set path variable
+	PATH=$PATH:$HOME/bin (add M2_HOME:M2) 
+
+type command to start bash profile
+	source .bash_profile
+
+
+
+echo $PATH
+echo $JAVA_HOME
+echo $M2_HOME
+
+
+
+============================================
+	Jenkins installtion on ubuntu
+============================================
+
+apt update
+
+Install JDK 8 :-
+	s 
+
+Install Jenkins Master on Ubuntu :-
+
+Add the repository key to the system:
+	s
+
+Add the Debian package to this repository:
+	vi /etc/apt/sources.list
+	deb https://pkg.jenkins.io/debian-stable binary/
+
+Install jenkins Package
+	apt update
+	apt install -y jenkins
+
+Status of Jenkins :-
+sudo systemctl status jenkins 
+sudo systemctl start jenkins
+sudo systemctl restart jenkins
+sudo systemctl stop jenkins
+
+configure java
+
+find path where java is install
+	file $(which java)
+	file '/etc/alternatives/java'
+
+then copy the path
+	'/usr/lib/jvm/java-8-openjdk-amd64/'
+	
+go to root directory
+	cd
+
+open .bash_profile in vi or in nano editor
+	vi .profile
+
+set env variable
+	JAVA_HOME='/usr/lib/jvm/java-8-openjdk-amd64'
+
+set path variable
+	PATH=$PATH:$JAVA_HOME/bin:$HOME/bin
+
+come out of file 
+	ESC :wq
+
+type command to start bash profile
+	source .profile
+
+configure maven 
+----------------
+
+
+1--- download the binary file apache.maven.org
+download it to /usr/local/
+wget https://mirrors.estointernet.in/apache/maven/maven-3/3.8.1/binaries/apache-maven-3.8.1-bin.tar.gz
+
+2--- untar and unzip it 
+	tar -xvzf   apache-maven-3.8.1-bin.tar.gz
+
+3--- remove tar.gz file
+	rm -rf  apache-maven-3.8.1-bin.tar.gz
+
+Set path & env variable. for this we have to go root directory (/root/), where we find .bash_profile
+
+
+Go inside  apache-maven-3.8.1
+	cd  apache-maven-3.8.1
+
+copy the path
+
+	pwd
+	/usr/local/maven/apache-maven-3.8.1
+
+set env variable
+	M2_HOME='/usr/local/maven/apache-maven-3.8.1'
+	M2='$M2_HOME/bin'
+
+set path variable
+	PATH=$PATH:$HOME/bin (add M2_HOME:M2) 
+
+type command to start bash profile
+	source .profile
+
+
+
+echo $PATH
+echo $JAVA_HOME
+echo $M2_HOME
+================================
+#!/bin/bash
+apt update -y
+apt install -y openjdk-8-jdk 
+wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+echo "deb https://pkg.jenkins.io/debian-stable binary/" >> /etc/apt/sources.list
+echo "JAVA_HOME='/usr/lib/jvm/java-8-openjdk-amd64" >> /root/.profile
+echo "PATH=$PATH:$JAVA_HOME/bin:$HOME/bin" >> /root/.profile
+source .profile
+apt update
+apt upgrade -y
+apt install -y jenkins
+apt install docker docker.io docker-compose -y
+systemctl restart jenkins
+systemctl start docker
+
+
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@     installtion docker on ubuntu     @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+apt-get update
+
+apt-get install apt-transport-https ca-certificates curl gnupg lsb-release -y
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+apt-get update
+
+apt-get install docker-ce docker-ce-cli containerd.io -y
+
+
+pulse@exactspace.co
+es-jenkins-admin
+
+#!ignexpoday3
+
+sudo systemctl restart jenkins
+sudo systemctl reload nginx
+
+upstream jenkins {
+  keepalive 32;
+  server 127.0.0.1:8080;
+}
+server {
+  location / {
+      sendfile off;
+      proxy_pass         http://jenkins;
+      proxy_redirect     default;
+      proxy_http_version 1.1;
+      proxy_set_header   Host              $host;
+      proxy_set_header   X-Real-IP         $remote_addr;
+      proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
+      proxy_set_header   X-Forwarded-Proto $scheme;
+      proxy_max_temp_file_size 0;
+  }
+
+}
+
+
+
+
+

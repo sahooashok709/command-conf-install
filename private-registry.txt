@@ -1,0 +1,10 @@
+#!/bin/bash
+
+ docker service create \
+  --name registry \
+  --mount type=bind,src=/data/registry,dst=/var/lib/registry \
+  -e REGISTRY_HTTP_ADDR=0.0.0.0:9000 \
+  -e REGISTRY_HTTP_HOST=https://dev.exactspace.co \
+  --publish published=9000(system_port),target=5000(container_port) \
+  --replicas 1 \
+  registry:2

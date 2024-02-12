@@ -1,0 +1,20 @@
+gunzip *
+unitId=$1
+for file in $(ls | grep bson | cut -d'.' -f1)
+do
+  echo $file
+  bsondump --outFile $file.json $file.bson
+done
+
+
+for file in $(ls | grep json | cut -d'.' -f1)
+do
+  echo $file.json
+  cat $file.json | grep $unitId > $file\-$unitId.json
+done
+
+for file in $(ls | grep $unitId | cut -d'-' -f1)
+do
+  echo $file\-$unitId.json
+  mongoimport --db exspv2 --collection $file $file-$unitId.json
+done

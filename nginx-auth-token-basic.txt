@@ -1,0 +1,47 @@
+Basic Auth Nginx
+===========================
+sudo apt install apache2-utils
+
+command:--	sudo htpasswd -c /etc/nginx/.FileName UserName
+eg:---		sudo htpasswd -c /etc/nginx/.htkairos es-user
+
+then it will ask for password .. -- give your desire password  (es-user123)
+
+edit nginx configuration file 
+	sudo vi /etc/nginx/nginx.conf
+
+add following after 
+location /path-which-want-you-to-setup { content}
+
+auth_basic “Administrator”;
+auth_basic_user_file /etc/nginx/FileName;
+
+eg:---
+       location /exactspace/ {
+                auth_basic “Administrator”;
+                auth_basic_user_file /etc/nginx/.htkairos;
+                proxy_set_header        Host $http_host;
+                proxy_set_header        X-Real-IP $remote_addr;
+                proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header        X-Forwarded-Proto $scheme;
+                proxy_set_header        X-Forwarded-Host $host;
+                proxy_set_header        X-Forwarded-Server $http_host;
+                proxy_set_header        X-Forwarded-Port 443;
+                proxy_pass http://urlORip;
+        }
+
+
+now reload your broswer
+
+es-user
+es-user123
+
+kairos
+es-user
+iota#re-kairos03
+
+
+
+location ~ /exactapi/units/(.*)/tagmeta
+
+location ~ /exactapi/units/(.*)/heatrates

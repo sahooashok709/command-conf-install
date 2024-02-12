@@ -1,0 +1,3 @@
+
+set x y
+config set stop-writes-on-bgsave-error no

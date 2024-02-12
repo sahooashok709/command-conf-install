@@ -1,0 +1,84 @@
+Reset server timeout
+vi /etc/ssh/sshd_config
+•	ClientAliveInterval 1200
+•	ClientAliveCountMax 3
+systemctl reload sshd
+
+clear cache 
+•	clear PageCache, dentries and inodes.
+sync; echo 3 > /proc/sys/vm/drop_caches 
+
+
+user management
+getfacl fileOrFolderName 
+setfacl -m u:userName:Permission fileOrFolderName (permission-->rwx) 
+
+group management
+setfacl -m g:groupName:Permission fileOrFolderName
+
+AWK
+
+SED
+sed -i 's/"//g'
+sed -i '/^$/d' log.txt
+
+
+CUT
+
+PS
+
+FIND
+
+
+see list of files with size in a window
+sudo ncdu
+
+truncate -s 0 <fileName>
+
+sudo logrotate -f /etc/logrotate.d/gap-bb-nohup
+
+sudo truncate -s 10000 1.log
+sudo truncate --size=50M test.txt
+find /path/to/files* -mtime +25 -exec rm {} \;
+ tail 100 -f
+
+docker service logs enrich_enricher-redis --tail 1000 | tee abc.txt
+
+ls | tee dirs.txt
+cat dirs.txt | xargs mkdir -p
+
+ps aux --sort=-%mem | head -n 5
+
+sudo journalctl -fu docker.service
+
+
+sudo netstat -tupln
+
+sudo apt autoremove
+sudo apt autoclean
+
+sudo journalctl --vacuum-size=10M
+
+ curl  http://13.251.5.125/exactapi/units/ | jq '.'  | grep id
+
+--constraint node.hostname==UTCPULSEPRAPP5 
+
+docker stats --no-stream --format "table {{.Name}}\t{{.Container}}\t{{.CPUPerc}}" | sort -k 3 -h
+
+
+?filter={"where" : {"key" : "value"}}
+
+export NODE_ENV=prod
+export NODE_ENV=prefix
+
+bsondump --outFile collection.json collection.bson
+
+
+mongoimport --db exspv2 --collection equipment units.json
+
+
+
+
+
+
+

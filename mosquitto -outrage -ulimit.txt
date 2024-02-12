@@ -1,0 +1,41 @@
+sudo vi /etc/init.d/mosquitto
+add below lines 
+after :-
+	 23 PIDFILE=/var/run/mosquitto.pid
+	 24 DAEMON=/usr/sbin/mosquitto
+
+ulimit -n 1000000 (highest no of open file according to system resources)
+
+after 
+	138 exit 0 (at the end)
+
+set_ulimit () {
+    ulimit -f unlimited
+    ulimit -t unlimited
+    ulimit -v unlimited
+    ulimit -n 1000000
+    ulimit -m unlimited
+    ulimit -u 1000000
+}
+
+start)
+    ...
+    # Update ulimit config in start command
+    set_ulimit
+    ...
+    ;;
+  stop)
+
+
+#sudo vi /etc/security/limits.conf
+
+#sudo prlimit -p 23770 --nofile=100000:10000000
+
+
+sudo systemctl daemon-reload
+
+
+
+
+
+

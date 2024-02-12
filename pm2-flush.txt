@@ -1,0 +1,7 @@
+cd /bin/
+sudo ln -s /opt/node-v10.24.1-linux-x64/bin/pm2 .
+cd /usr/bin
+sudo ln -s /opt/node-v10.24.1-linux-x64/bin/node .
+
+crontab -e 
+pm2 flush

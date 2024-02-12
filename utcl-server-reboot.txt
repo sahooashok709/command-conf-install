@@ -1,0 +1,20 @@
+utcl3
+stop stack by ./stop.sh
+pm2 save 
+sudo reboot 
+
+utcl2
+take a backup of mongo
+stop cassnadra kairos mongo 
+
+
+
+utcl1 
+utcl2
+utcl3 
+utcl4 
+utcl5 
+%s/10.13.1.221\/10.13.1.76\/g  
+
+docker swarm leave -f 
+docker swarm join --token SWMTKN-1-0uj59uke3fn338ymrhtz3a5di4g4jdqdz6iqe9tom7jhyc6dwt-e5qdkr11sp00rcskl0mkj40c2 10.211.19.36:2377

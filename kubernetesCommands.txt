@@ -1,0 +1,20 @@
+Ports
+===========
+TCP-->Inbound-->6443      -->Kubernetes API server
+TCP-->Inbound-->2379-2380 -->etcd server client API
+TCP-->Inbound-->10250	  -->Kubelet API
+TCP-->Inbound-->10251	  -->kube-scheduler
+TCP-->Inbound-->10252	  -->kube-controller-manager
+TCP-->Inbound-->10255	  -->read only Kublet API
+
+============
+Commands
+============
+kubectl apply -f fileName
+kubectl get pods	(show the pod)
+kubectl get pods -o wide (more info) 
+kubectl get nodes	(show the pod)
+kubectl get nodes -o wide  (more info)
+kubectl delete -f fileName
+kubectl pods --all-namespaces (show all the pods including systems pods)
+kubectl 
