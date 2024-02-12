@@ -1,4 +1,5 @@
 Reset server timeout
+
 vi /etc/ssh/sshd_config
 •	ClientAliveInterval 1200
 •	ClientAliveCountMax 3
